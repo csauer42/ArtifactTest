@@ -12,6 +12,8 @@ pool:
 steps:
 - script: wget https://developer.arm.com/-/media/Files/downloads/gnu-a/10.3-2021.07/binrel/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu.tar.xz
 - script: ls -lah && pwd
+- script: echo $(Build.ArtifactStagingDirectory)
+- script: ls -lah $(Build.ArtifactStagingDirectory)
 
 #- task: UniversalPackages@0
 #  inputs:
