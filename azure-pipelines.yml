@@ -1,0 +1,24 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: wget https://developer.arm.com/-/media/Files/downloads/gnu-a/10.3-2021.07/binrel/gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu.tar.xz
+  displayName: 'Download toolchain'
+
+- task: UniversalPackages@0
+  inputs:
+    command: 'publish'
+    publishDirectory: '$(Build.ArtifactStagingDirectory)'
+    feedsToUsePublish: 'internal'
+    vstsFeedPublish: '477fc493-2c12-4877-954a-3040372f2485/40809f3d-1cfb-45c7-b7e3-589968369bc9'
+    vstsFeedPackagePublish: 'gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu.tar.xz'
+    versionOption: 'patch'
+    packagePublishDescription: 'test toolchain'
