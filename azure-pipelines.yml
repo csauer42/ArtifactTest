@@ -19,5 +19,17 @@ steps:
     feedsToUsePublish: 'internal'
     vstsFeedPublish: '477fc493-2c12-4877-954a-3040372f2485/40809f3d-1cfb-45c7-b7e3-589968369bc9'
     vstsFeedPackagePublish: 'gcc-arm-10.3-2021.07-x86_64-aarch64-none-linux-gnu.tar.xz'
-    versionOption: 'patch'
+    versionOption: 'custom'
+    versionPublish: '1.0.0'
     packagePublishDescription: 'test toolchain'
+- task: UniversalPackages@0
+  inputs:
+    command: 'download'
+    downloadDirectory: '$(System.DefaultWorkingDirectory)'
+    feedsToUse: 'internal'
+    vstsFeed: '477fc493-2c12-4877-954a-3040372f2485/40809f3d-1cfb-45c7-b7e3-589968369bc9'
+    vstsFeedPackage: '99d9c40e-6b0d-4e72-93fa-a28694d68ddf'
+    vstsPackageVersion: '0.0.1'
+- script: |
+    ls -lah $(System.DefaultWorkingDirectory)
+    md5sum $(System.DefaultWorkingDirectory)/*
